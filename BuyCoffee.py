@@ -1,33 +1,50 @@
-print("Bem vindo ao Café Python!")
-print("Escolha o tamanho do seu café: (P) Pequeno (R$2,50), (M) Médio (R$3,00), (G) Grande (R$3,50).")
-tamanho_cafe = input("Esolha o tamanho: ").upper()
+print("Bem-vindo ao Café Python!")
 
-print("Escolha o tipo do café: (E) Expresso (R$1,50), (C) Cappuccino R$(2,00), (L) Latte (R$2,50).")
-tipo_cafe = input("Escolha o tipo de café: ").upper()
+# Variáveis para armazenar o valor total e a quantidade de cafés pedidos
+valor_total = 0
+quantidade_cafes = 0
+continuar_pedido = True
 
-preco = 0
+while continuar_pedido:
+    print("Escolha o tamanho do seu café: (P) Pequeno, (M) Médio, (G) Grande")
+    tamanho_cafe = input("Escolha o tamanho (ou digite 'F' para finalizar o pedido): ").upper()
 
-match tamanho_cafe:
-    case "P":
-        preco += 2.50
-    case "M":
-        preco += 3.00
-    case "G":
-        preco += 3.50
-    case _:
-        print("Opção de tamanho inválida!")
-        exit()
+    if tamanho_cafe == 'F':
+        continuar_pedido = False
+    else:
+        tipo_cafe = input("Escolha o tipo de café: (E) Espresso, (C) Cappuccino, (L) Latte").upper()
 
-match tipo_cafe:
-    case "E":
-        preco += 1.50
-    case "C":
-        preco += 2.00
-    case "L":
-        preco += 2.50
-    case _:
-        print("Opção do tipo de café inválida!")
-        exit()
+        preco = 0
 
-print("Seu pedido foi confirmado!")
-print(f"Total a pagar: R$ {preco}")
+        match tamanho_cafe:
+            case "P":
+                preco += 2.50
+            case "M":
+                preco += 3.00
+            case "G":
+                preco += 3.50
+            case _:
+                print("Opção de tamanho inválida!")
+                continue  # Volta ao início do loop
+
+        match tipo_cafe:
+            case "E":
+                preco += 1.50
+                print("Café Espresso selecionado")
+            case "C":
+                preco += 2.00
+                print("Café Cappuccino selecionado")
+            case "L":
+                preco += 2.50
+                print("Café Latte selecionado")
+            case _:
+                print("Opção de café inválida!")
+                continue  # Volta ao início do loop
+
+        valor_total += preco
+        quantidade_cafes += 1
+
+        print("Café adicionado ao pedido!")
+
+print(f"Seu pedido foi finalizado. Total a pagar: R${valor_total}")
+print(f"Quantidade de cafés pedidos: {quantidade_cafes}")
